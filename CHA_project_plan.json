@@ -1,0 +1,78 @@
+{
+  "project": "Catalog Health AI",
+  "start_date": "2026-04-25",
+  "local_path": "C:\\Users\\sridi\\Documents\\Claude\\projects\\CatalogHealthAI",
+  "sprints": [
+    {
+      "week": 1,
+      "name": "Backend + DB + Ingestion",
+      "start": "2026-04-25",
+      "end": "2026-05-01",
+      "color": "purple",
+      "tasks": [
+        {"id": "W1-T1", "name": "Set up GitHub repo + project scaffold", "start": "2026-04-25", "end": "2026-04-25", "priority": "High", "deps": [], "comments": "Use FastAPI cookiecutter or manual scaffold. Include .env, requirements.txt, Dockerfile stub."},
+        {"id": "W1-T2", "name": "Provision Supabase project + create DB schema", "start": "2026-04-25", "end": "2026-04-26", "priority": "High", "deps": ["W1-T1"], "comments": "Create assets, lineage, findings tables. Save DDL to /db/schema.sql in repo."},
+        {"id": "W1-T3", "name": "Build FastAPI app skeleton + folder structure", "start": "2026-04-26", "end": "2026-04-27", "priority": "High", "deps": ["W1-T1"], "comments": "Folders: /api, /models, /services, /agents, /tests. Wire up CORS + health check endpoint."},
+        {"id": "W1-T4", "name": "Implement POST /upload-assets endpoint", "start": "2026-04-27", "end": "2026-04-28", "priority": "High", "deps": ["W1-T2","W1-T3"], "comments": "Accept CSV or JSON. Validate required fields (name, type, domain). Upsert into assets table."},
+        {"id": "W1-T5", "name": "Implement POST /upload-lineage endpoint", "start": "2026-04-27", "end": "2026-04-28", "priority": "High", "deps": ["W1-T2","W1-T3"], "comments": "Accept source/target pairs. Store confidence_score default 1.0 if not provided."},
+        {"id": "W1-T6", "name": "Build Collibra CSV export parser", "start": "2026-04-28", "end": "2026-04-29", "priority": "High", "deps": ["W1-T4","W1-T5"], "comments": "Map Collibra export column headers to internal schema. Handle missing fields gracefully."},
+        {"id": "W1-T7", "name": "Implement GET /health-score endpoint", "start": "2026-04-29", "end": "2026-04-29", "priority": "High", "deps": ["W1-T2"], "comments": "Score = 100 - (5*High + 3*Med + 1*Low). Return score + breakdown by severity."},
+        {"id": "W1-T8", "name": "Implement GET /issues endpoint", "start": "2026-04-29", "end": "2026-04-30", "priority": "Medium", "deps": ["W1-T2"], "comments": "Paginated. Filter by severity, status, domain. Sort by severity desc by default."},
+        {"id": "W1-T9", "name": "Implement GET /summary stub endpoint", "start": "2026-04-30", "end": "2026-04-30", "priority": "Medium", "deps": ["W1-T7","W1-T8"], "comments": "Return placeholder summary text for now. Claude API wired in Week 3."},
+        {"id": "W1-T10", "name": "Seed DB with synthetic Collibra test data", "start": "2026-04-30", "end": "2026-05-01", "priority": "Medium", "deps": ["W1-T4","W1-T5"], "comments": "Create 50 assets, 30 lineage pairs, intentional gaps: missing owners, stale assets, broken lineage."}
+      ]
+    },
+    {
+      "week": 2,
+      "name": "Rules Engine + AI Agents",
+      "start": "2026-05-02",
+      "end": "2026-05-08",
+      "color": "teal",
+      "tasks": [
+        {"id": "W2-T1", "name": "Build rules engine core + severity scoring", "start": "2026-05-02", "end": "2026-05-03", "priority": "High", "deps": ["W1-T10"], "comments": "6 rules: missing owner, blank description, stale >180d, no steward on critical, disconnected lineage, duplicate names."},
+        {"id": "W2-T2", "name": "Build Metadata Curator Agent", "start": "2026-05-03", "end": "2026-05-04", "priority": "High", "deps": ["W2-T1"], "comments": "Detects: missing descriptions, duplicates, stale assets, wrong ownership, unused assets. Returns findings list."},
+        {"id": "W2-T3", "name": "Build Lineage Guardian Agent (NetworkX)", "start": "2026-05-03", "end": "2026-05-05", "priority": "High", "deps": ["W2-T1"], "comments": "Load lineage into NetworkX DiGraph. Detect: broken paths, orphan nodes, disconnected clusters, low-confidence zones."},
+        {"id": "W2-T4", "name": "Build Governance Gap Agent", "start": "2026-05-05", "end": "2026-05-06", "priority": "High", "deps": ["W2-T2","W2-T3"], "comments": "Runs AFTER W2-T2 and W2-T3. Checks: every CDE has owner, every KPI has lineage, PII classified, critical assets stewarded."},
+        {"id": "W2-T5", "name": "Build agent orchestration layer", "start": "2026-05-05", "end": "2026-05-07", "priority": "High", "deps": ["W2-T2","W2-T3"], "comments": "Metadata Curator + Lineage Guardian run in parallel (asyncio). Governance Gap runs after both complete. Executive Risk runs last."},
+        {"id": "W2-T6", "name": "Build Executive Risk Agent (aggregator)", "start": "2026-05-06", "end": "2026-05-07", "priority": "High", "deps": ["W2-T4","W2-T5"], "comments": "Aggregates all findings. Computes health score, audit readiness score, top risks, priority action list."},
+        {"id": "W2-T7", "name": "Write unit tests for all 6 rules", "start": "2026-05-07", "end": "2026-05-08", "priority": "Medium", "deps": ["W2-T1"], "comments": "Use pytest. Test each rule with both passing and failing asset fixtures. Aim for 90% coverage on rules engine."},
+        {"id": "W2-T8", "name": "Integration test: full agent pipeline end-to-end", "start": "2026-05-08", "end": "2026-05-08", "priority": "Medium", "deps": ["W2-T6","W2-T7"], "comments": "Run all 4 agents against synthetic DB. Validate findings count, score calculation, ordering."}
+      ]
+    },
+    {
+      "week": 3,
+      "name": "AI Summary Layer (Claude API)",
+      "start": "2026-05-09",
+      "end": "2026-05-15",
+      "color": "amber",
+      "tasks": [
+        {"id": "W3-T1", "name": "Integrate Claude API — SDK setup + auth", "start": "2026-05-09", "end": "2026-05-09", "priority": "High", "deps": ["W2-T8"], "comments": "Install anthropic SDK. Store API key in .env. Create /services/claude_client.py wrapper."},
+        {"id": "W3-T2", "name": "Build executive summary prompt + response parser", "start": "2026-05-09", "end": "2026-05-10", "priority": "High", "deps": ["W3-T1"], "comments": "Input: findings counts by severity + top issues. Output: 3-paragraph executive summary + top 3 actions."},
+        {"id": "W3-T3", "name": "Build steward guidance prompt", "start": "2026-05-10", "end": "2026-05-11", "priority": "High", "deps": ["W3-T1"], "comments": "Per-asset fix suggestions. Quick wins vs complex fixes. Owner assignment recommendations."},
+        {"id": "W3-T4", "name": "Build trend analysis prompt", "start": "2026-05-11", "end": "2026-05-12", "priority": "Medium", "deps": ["W3-T1"], "comments": "Compare current vs previous scan. Identify improving vs degrading domains. Highlight repeated issue patterns."},
+        {"id": "W3-T5", "name": "Wire AI outputs into GET /summary endpoint", "start": "2026-05-12", "end": "2026-05-13", "priority": "High", "deps": ["W3-T2","W3-T3","W3-T4"], "comments": "Cache AI responses per scan run (don't re-call Claude on every GET). Store in findings table or separate summaries table."},
+        {"id": "W3-T6", "name": "Build email report template + GitHub Actions scheduler", "start": "2026-05-13", "end": "2026-05-14", "priority": "Medium", "deps": ["W3-T5"], "comments": "Weekly digest email via SendGrid or Resend. GitHub Actions cron: 0 8 * * 1 (Monday 8am). Include health score + top 3 risks."},
+        {"id": "W3-T7", "name": "QA AI outputs against synthetic test data", "start": "2026-05-14", "end": "2026-05-15", "priority": "Medium", "deps": ["W3-T5"], "comments": "Validate summary quality, hallucination check, tone consistency. Tune prompts as needed."}
+      ]
+    },
+    {
+      "week": 4,
+      "name": "Dashboard + Launch Prep",
+      "start": "2026-05-16",
+      "end": "2026-05-22",
+      "color": "blue",
+      "tasks": [
+        {"id": "W4-T1", "name": "Set up Next.js project + Tailwind + Vercel", "start": "2026-05-16", "end": "2026-05-16", "priority": "High", "deps": ["W3-T7"], "comments": "npx create-next-app. Configure Tailwind. Connect to Vercel for auto-deploy from main branch."},
+        {"id": "W4-T2", "name": "Pick startup name + buy domain", "start": "2026-05-16", "end": "2026-05-17", "priority": "High", "deps": [], "comments": "Options: CatalogPulse, MetaGuardian, TrustLine AI, GovernOps. Check .ai and .com availability."},
+        {"id": "W4-T3", "name": "Build Overview page (health score + sparklines)", "start": "2026-05-16", "end": "2026-05-18", "priority": "High", "deps": ["W4-T1"], "comments": "Recharts gauge for health score. Sparklines for score trend. Top risks summary cards. Last scan timestamp."},
+        {"id": "W4-T4", "name": "Build Issues page (filterable findings table)", "start": "2026-05-18", "end": "2026-05-19", "priority": "High", "deps": ["W4-T1"], "comments": "Filter by: severity, agent, domain, status. Sort columns. Inline status update (Open → In Progress → Resolved)."},
+        {"id": "W4-T5", "name": "Build Lineage Health page (graph viz)", "start": "2026-05-18", "end": "2026-05-20", "priority": "High", "deps": ["W4-T1"], "comments": "Use react-force-graph or vis-network. Highlight broken nodes in red. Click node to see asset details."},
+        {"id": "W4-T6", "name": "Build Recommendations page (AI priority actions)", "start": "2026-05-20", "end": "2026-05-21", "priority": "High", "deps": ["W4-T3","W4-T4"], "comments": "Render Claude-generated executive summary + per-action cards. Quick win vs complex fix badges."},
+        {"id": "W4-T7", "name": "Build landing page with upload CTA", "start": "2026-05-19", "end": "2026-05-21", "priority": "High", "deps": ["W4-T2"], "comments": "Headline: Your Collibra is installed. We make it work. CTA: Upload export → free health report in 24h. Pilot pricing callout."},
+        {"id": "W4-T8", "name": "Prepare demo dataset (synthetic Collibra export)", "start": "2026-05-16", "end": "2026-05-18", "priority": "Medium", "deps": ["W1-T10"], "comments": "Polish synthetic data for demos. Realistic asset names, domains, owners. Pre-compute findings for demo mode."},
+        {"id": "W4-T9", "name": "Deploy to Vercel staging + smoke test", "start": "2026-05-21", "end": "2026-05-21", "priority": "High", "deps": ["W4-T3","W4-T4","W4-T5","W4-T6","W4-T7"], "comments": "Verify all pages load. Test API connectivity from Vercel to FastAPI. Check env vars in Vercel dashboard."},
+        {"id": "W4-T10", "name": "End-to-end QA + bug fix pass", "start": "2026-05-21", "end": "2026-05-22", "priority": "High", "deps": ["W4-T9"], "comments": "Full user journey: upload CSV → view dashboard → read AI summary → see recommendations. Fix any blockers."}
+      ]
+    }
+  ]
+}

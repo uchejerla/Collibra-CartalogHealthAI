@@ -1,0 +1,51 @@
+Asset ID,Asset Name,Asset Type,Domain,Data Owner,Data Steward,Description,Critical Flag,PII,Last Modified,Tags
+CHA-001,CUSTOMER_MASTER,Table,Customer,Sarah Chen,Mike Ross,Master customer reference table containing all customer demographics and account information.,True,True,2026-01-10,CDE,PII
+CHA-002,ACCOUNT_BALANCE,Table,Finance,,,Core account balance table for all retail banking accounts.,True,False,2025-08-01,CDE,KPI
+CHA-003,TRANSACTION_HISTORY,Table,Finance,James Wilson,,Stores all historical financial transactions.,True,False,2025-06-15,CDE
+CHA-004,PRODUCT_CATALOG,Table,Product,Alice Park,Tom Hughes,Complete product catalog with pricing and attributes.,False,False,2026-02-20,
+CHA-005,LOAN_APPLICATIONS,Table,Lending,,,Contains all submitted loan application records.,True,True,2025-05-01,CDE,PII
+CHA-006,CREDIT_SCORES,Table,Risk,David Kim,Lisa Ray,Customer credit score history from bureaus.,True,True,2025-09-30,CDE,PII
+CHA-007,BRANCH_PERFORMANCE,Table,Retail,,Nancy Drew,Monthly branch performance KPIs and metrics.,False,False,2025-11-15,KPI
+CHA-008,REGULATORY_REPORTS,Table,Compliance,Frank Müller,Sandra Lee,BCBS 239 regulatory reporting outputs.,True,False,2025-12-01,CDE
+CHA-009,EMPLOYEE_RECORDS,Table,HR,,,Contains all active and inactive employee personal records.,False,True,2025-07-22,PII
+CHA-010,MARKET_DATA_FEED,Table,Trading,,,Real-time market data ingested from Bloomberg.,True,False,2025-10-05,CDE
+CHA-011,RISK_EXPOSURE,Table,Risk,David Kim,Lisa Ray,Aggregated risk exposure calculations by portfolio.,True,False,2026-01-28,CDE,KPI
+CHA-012,COLLATERAL_REGISTRY,Table,Lending,James Wilson,,Registry of all pledged collateral assets.,True,False,2025-04-10,CDE
+CHA-013,CUSTOMER_SEGMENTS,Table,Marketing,Alice Park,Tom Hughes,Customer segmentation model outputs.,False,False,2026-03-01,
+CHA-014,FRAUD_ALERTS,Table,Risk,,,Detected fraud alert records.,True,True,2025-08-20,CDE,PII
+CHA-015,PAYMENT_INSTRUCTIONS,Table,Finance,Sarah Chen,Mike Ross,Outgoing and incoming payment instruction records.,True,True,2025-12-15,CDE,PII
+CHA-016,INTEREST_RATES,Table,Finance,Frank Müller,Sandra Lee,Current and historical interest rate reference data.,False,False,2026-02-10,
+CHA-017,KYC_DOCUMENTS,Table,Compliance,,,Know Your Customer document metadata.,True,True,2025-03-01,CDE,PII
+CHA-018,PORTFOLIO_POSITIONS,Table,Trading,,,Daily portfolio position snapshot.,True,False,2025-09-01,CDE
+CHA-019,COUNTERPARTY_MASTER,Table,Risk,David Kim,,Master file for all trading counterparties.,True,False,2025-11-30,CDE
+CHA-020,BRANCH_NETWORK,Table,Retail,Alice Park,Tom Hughes,Physical branch location and attribute data.,False,False,2026-01-15,
+CHA-021,CUSTOMER_MASTER,Table,Retail,Bob Jones,,Duplicate of customer master in retail domain.,False,False,2025-12-20,
+CHA-022,REVENUE_REPORT,Table,Finance,Frank Müller,Sandra Lee,Monthly consolidated revenue report.,False,False,2026-02-28,KPI
+CHA-023,COST_CENTERS,Table,Finance,,,Internal cost center allocation table.,False,False,2025-07-01,
+CHA-024,AUDIT_LOG,Table,Compliance,Sarah Chen,Mike Ross,System-level audit trail for all data changes.,False,False,2026-03-10,
+CHA-025,TRANSACTION_SUMMARY,View,Finance,,,Aggregated transaction summary by account.,False,False,2025-06-01,
+CHA-026,ACTIVE_CUSTOMERS,View,Customer,,,Filtered view of active customers only.,False,False,2024-12-01,
+CHA-027,HIGH_VALUE_ACCOUNTS,View,Customer,Sarah Chen,,Accounts with balance above $1M.,True,False,2025-11-01,CDE
+CHA-028,DELINQUENT_LOANS,View,Lending,,,Loans past due by 30/60/90 days.,True,True,2025-04-15,CDE,PII
+CHA-029,PNL_SUMMARY,Report,Finance,Frank Müller,Sandra Lee,Daily P&L summary report for CFO.,False,False,2026-03-15,KPI
+CHA-030,CAPITAL_ADEQUACY_RATIO,KPI,Risk,David Kim,Lisa Ray,BCBS regulatory capital adequacy ratio.,True,False,2026-02-01,CDE,KPI
+CHA-031,LIQUIDITY_COVERAGE,KPI,Risk,,,Liquidity coverage ratio — LCR.,True,False,2025-10-01,CDE,KPI
+CHA-032,NET_STABLE_FUNDING,KPI,Risk,,,Net stable funding ratio — NSFR.,True,False,2025-10-01,CDE,KPI
+CHA-033,RETURN_ON_EQUITY,KPI,Finance,Frank Müller,,Return on equity KPI.,False,False,2026-01-01,KPI
+CHA-034,COST_INCOME_RATIO,KPI,Finance,,,Cost to income ratio.,False,False,2025-12-01,KPI
+CHA-035,CUSTOMER_LTV,KPI,Marketing,,,Customer lifetime value metric.,False,False,2025-08-15,KPI
+CHA-036,CLAIMS_DATA,Table,Insurance,,,Insurance claims raw data.,True,True,2025-05-20,CDE,PII
+CHA-037,POLICY_REGISTER,Table,Insurance,,,Active insurance policy register.,True,False,2025-06-30,CDE
+CHA-038,REINSURANCE_TREATIES,Table,Insurance,James Wilson,Nancy Drew,Reinsurance treaty terms and limits.,False,False,2026-01-20,
+CHA-039,PREMIUM_INCOME,Table,Insurance,,,Gross and net premium income by product.,True,False,2025-09-15,CDE,KPI
+CHA-040,CLAIMS_RESERVE,Table,Insurance,,,Outstanding claims reserve calculations.,True,False,2025-08-01,CDE
+CHA-041,SOLVENCY_RATIO,KPI,Insurance,,,Solvency II ratio.,True,False,2025-07-01,CDE,KPI
+CHA-042,COMBINED_RATIO,KPI,Insurance,James Wilson,Nancy Drew,Insurance combined ratio.,False,False,2025-12-15,KPI
+CHA-043,CATASTROPHE_EXPOSURE,Table,Risk,David Kim,,Catastrophe event exposure model.,True,False,2025-11-20,CDE
+CHA-044,UNDERWRITING_RESULTS,Table,Insurance,,,Underwriting profit/loss by line.,True,False,2025-04-01,CDE
+CHA-045,MORTALITY_RATES,Table,Actuarial,,,Actuarial mortality rate tables.,True,False,2024-12-15,CDE
+CHA-046,INVESTMENT_PORTFOLIO,Table,Finance,Frank Müller,Sandra Lee,Asset investment portfolio holdings.,True,False,2026-02-15,CDE
+CHA-047,DERIVATIVES_REGISTER,Table,Trading,,,OTC derivatives trade register.,True,False,2025-10-20,CDE
+CHA-048,SANCTIONS_LIST,Table,Compliance,Sarah Chen,Mike Ross,OFAC/EU sanctions screening list.,True,True,2026-03-20,CDE,PII
+CHA-049,AML_ALERTS,Table,Compliance,,,Anti-money laundering alert records.,True,True,2025-09-10,CDE,PII
+CHA-050,STRESS_TEST_RESULTS,Table,Risk,David Kim,,Regulatory stress test scenario results.,True,False,2025-11-25,CDE

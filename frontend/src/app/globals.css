@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Brand colour: #3C3489 (deep purple) ─────────────────────────────────── */
+@layer base {
+  :root {
+    --brand-50:  #eeecfb;
+    --brand-100: #d6d2f6;
+    --brand-200: #ada5ed;
+    --brand-300: #8479e4;
+    --brand-400: #5b4cdb;
+    --brand-500: #3c3489;   /* primary */
+    --brand-600: #312b72;
+    --brand-700: #26225b;
+    --brand-800: #1b1844;
+    --brand-900: #10102d;
+  }
+}
+
+@layer base {
+  html {
+    @apply bg-gray-950 text-gray-100 antialiased;
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { @apply bg-gray-900; }
+  ::-webkit-scrollbar-thumb { @apply bg-gray-700 rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-gray-600; }
+}
+
+@layer utilities {
+  .text-brand     { color: var(--brand-500); }
+  .bg-brand       { background-color: var(--brand-500); }
+  .border-brand   { border-color: var(--brand-500); }
+  .ring-brand     { --tw-ring-color: var(--brand-500); }
+}

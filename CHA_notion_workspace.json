@@ -1,0 +1,29 @@
+{
+  "project": "Catalog Health AI",
+  "created": "2026-04-25",
+  "notion": {
+    "hub_page": {
+      "title": "🚀 Catalog Health AI — Project Hub",
+      "id": "34d8afb1-a56f-8167-a074-e9bccadc46d2",
+      "url": "https://www.notion.so/34d8afb1a56f8167a074e9bccadc46d2"
+    },
+    "task_database": {
+      "title": "📋 Catalog Health AI — Task Tracker",
+      "id": "23820100-f1ac-4fc7-b1e8-0e4b92532f69",
+      "data_source_id": "56f3368d-a6f0-41fa-a669-9f363df5dc48",
+      "url": "https://www.notion.so/23820100f1ac4fc7b1e80e4b92532f69"
+    },
+    "views": {
+      "sprint_board": "view://34d8afb1-a56f-815a-a4b7-000ce94e027d",
+      "timeline": "view://34d8afb1-a56f-81b1-b77b-000cfc32e772",
+      "active_sprint_w1": "view://34d8afb1-a56f-81aa-ad01-000c892c860f"
+    }
+  },
+  "task_count": 35,
+  "sprints": {
+    "week1": {"name": "Backend + DB + Ingestion", "dates": "2026-04-25 to 2026-05-01", "tasks": 10},
+    "week2": {"name": "Rules Engine + AI Agents", "dates": "2026-05-02 to 2026-05-08", "tasks": 8},
+    "week3": {"name": "AI Summary Layer (Claude API)", "dates": "2026-05-09 to 2026-05-15", "tasks": 7},
+    "week4": {"name": "Dashboard + Launch Prep", "dates": "2026-05-16 to 2026-05-22", "tasks": 10}
+  }
+}
